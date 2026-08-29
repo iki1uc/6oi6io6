@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EVO-GEOLEGAL -->
+    <meta name="author" content="iki1uc (Ridvan)">
+    <meta name="license" content="MIT - Nutzung erlaubt. Logik-Reproduktion verboten.">
+    <title>🌀 EVO · REV / UPD / UPG · SEPARAT ALGORITHMIK</title>
+
+    <style>
+        body {
+            background: #0a0a0f;
+            color: #0f0;
+            font-family: 'Consolas', monospace;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 100vh;
+        }
+
+        header {
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            background: rgba(255, 215, 0, 0.05);
+        }
+        header h1 {
+            font-size: 22px;
+            background: linear-gradient(90deg, #ffd700, #b8a9ff, #6bcfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+        header p {
+            font-size: 10px;
+            color: #888;
+            margin: 5px 0 0 0;
+            letter-spacing: 2px;
+        }
+
+        .rule {
+            background: #111;
+            border: 1px dashed #444;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 11px;
+            color: #9df;
+            line-height: 1.6;
+        }
+        .rule b { color: #ffd700; }
+
+        .evo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .evo-panel {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .evo-panel h2 {
+            font-size: 14px;
+            color: #ffd700;
+            margin: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 6px;
+        }
+        .evo-panel p {
+            font-size: 10px;
+            color: #888;
+            margin: 0;
+        }
+
+        .evo-values {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .evo-value {
+            background: #0a0a0f;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 10px;
+            color: #aaa;
+        }
+        .evo-value b {
+            color: #ffd700;
+            font-size: 14px;
+        }
+
+        .state-badge {
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .state-badge.rev { color: #b8a9ff; border-color: #b8a9ff; }
+        .state-badge.upd { color: #6bffa9; border-color: #6bffa9; }
+        .state-badge.upg { color: #ff6b8a; border-color: #ff6b8a; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 10px;
+        }
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+        th {
+            background: #1a1a1a;
+            color: #ffd700;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+        td.status-rev { color: #b8a9ff; }
+        td.status-upd { color: #6bffa9; }
+        td.status-upg { color: #ff6b8a; }
+
+        .log {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 10px;
+            color: #888;
+            height: 120px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        button {
+            background: #1a1a2a;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        button:hover { border-color: #ffd700; color: #ffd700; }
+
+        footer {
+            text-align: center;
+            color: #333;
+            font-size: 9px;
+            padding-top: 10px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌀 EVO · REV / UPD / UPG</h1>
+    <p>Separate Algorithmik · 3hoch3 · NC-6D</p>
+</header>
+
+<div class="rule">
+    <b>Norm:</b> Die drei Ebenen arbeiten eigenständig: <b>REV</b> (Review) bewertet rückblickend, <b>UPD</b> (Update) verändert Daten, <b>UPG</b> (Upgrade) erweitert Strukturen. Jede Ebene hat ihren eigenen Algorithmus und Status.
+</div>
+
+<div class="evo-grid">
+    <div class="evo-panel">
+        <h2 style="color:#b8a9ff;">🔮 REV · Review</h2>
+        <p>Bewertung rückblickend · Was lief gut? Was lief schlecht?</p>
+        <div class="evo-values">
+            <div class="evo-value"><b id="rev-score">0</b> SCORE</div>
+            <div class="evo-value"><b id="rev-count">0</b> RUNS</div>
+        </div>
+        <div class="state-badge rev" id="rev-state">IDLE</div>
+    </div>
+
+    <div class="evo-panel">
+        <h2 style="color:#6bffa9;">🔄 UPD · Update</h2>
+        <p>Änderung aktueller Zustände · Was ändert sich jetzt?</p>
+        <div class="evo-values">
+            <div class="evo-value"><b id="upd-count">0</b> CHANGES</div>
+            <div class="evo-value"><b id="upd-level">0</b> LEVEL</div>
+        </div>
+        <div class="state-badge upd" id="upd-state">IDLE</div>
+    </div>
+
+    <div class="evo-panel">
+        <h2 style="color:#ff6b8a;">🚀 UPG · Upgrade</h2>
+        <p>Erweiterung der Strukturen · Was wird besser?</p>
+        <div class="evo-values">
+            <div class="evo-value"><b id="upg-count">0</b> UPGRADES</div>
+            <div class="evo-value"><b id="upg-level">0</b> LEVEL</div>
+        </div>
+        <div class="state-badge upg" id="upg-state">IDLE</div>
+    </div>
+</div>
+
+<!-- Tabelle für die drei Ebenen -->
+<table>
+    <thead>
+        <tr>
+            <th>Ebene</th>
+            <th>Status</th>
+            <th>Wert</th>
+            <th>Nächster Schritt</th>
+        </tr>
+    </thead>
+    <tbody id="evo-tbl"></tbody>
+</table>
+
+<div class="log" id="log">[init] EVO-System bereit.</div>
+
+<footer>⚖️ EVO-GEOLEGAL · iki1uc © · Code nutzbar, Logik unkopierbar.</footer>
+
+<script>
+// ============================================================
+// EVO · REV / UPD / UPG · Getrennte Algorithmik
+// ============================================================
+
+// 1. Definitionen
+const EVO = {
+    REV: {
+        name: "REV (Review)",
+        type: "review",
+        score: 0,
+        runs: 0,
+        state: "IDLE"
+    },
+    UPD: {
+        name: "UPD (Update)",
+        type: "update",
+        changes: 0,
+        level: 0,
+        state: "IDLE"
+    },
+    UPG: {
+        name: "UPG (Upgrade)",
+        type: "upgrade",
+        count: 0,
+        level: 0,
+        state: "IDLE"
+    }
+};
+
+// 2. Algorithmen
+function revRun() {
+    EVO.REV.runs++;
+    EVO.REV.score = Math.floor(Math.random() * 100) + 1; // Simulierte Bewertung
+    EVO.REV.state = EVO.REV.score > 70 ? "POSITIV" : EVO.REV.score > 40 ? "NEUTRAL" : "NEGATIV";
+
+    document.getElementById('rev-score').textContent = EVO.REV.score;
+    document.getElementById('rev-count').textContent = EVO.REV.runs;
+    document.getElementById('rev-state').textContent = EVO.REV.state;
+    log(`🔮 REV: Lauf ${EVO.REV.runs}, Score ${EVO.REV.score}, Status ${EVO.REV.state}`);
+}
+
+function updRun() {
+    EVO.UPD.changes++;
+    EVO.UPD.level = (EVO.UPD.level + 1) % 10;
+    EVO.UPD.state = EVO.UPD.changes % 2 === 0 ? "AKTIV" : "PAUSE";
+
+    document.getElementById('upd-count').textContent = EVO.UPD.changes;
+    document.getElementById('upd-level').textContent = EVO.UPD.level;
+    document.getElementById('upd-state').textContent = EVO.UPD.state;
+    log(`🔄 UPD: Änderung ${EVO.UPD.changes}, Level ${EVO.UPD.level}, Status ${EVO.UPD.state}`);
+}
+
+function upgRun() {
+    EVO.UPG.count++;
+    EVO.UPG.level = (EVO.UPG.level + 5) % 50;
+    EVO.UPG.state = EVO.UPG.count > 10 ? "ERWEITERT" : "STANDARD";
+
+    document.getElementById('upg-count').textContent = EVO.UPG.count;
+    document.getElementById('upg-level').textContent = EVO.UPG.level;
+    document.getElementById('upg-state').textContent = EVO.UPG.state;
+    log(`🚀 UPG: Erweiterung ${EVO.UPG.count}, Level ${EVO.UPG.level}, Status ${EVO.UPG.state}`);
+}
+
+// 3. Render-Tabelle
+function renderTable() {
+    const body = document.getElementById('evo-tbl');
+    body.innerHTML = '';
+
+    Object.values(EVO).forEach(e => {
+        const tr = document.createElement('tr');
+        const status = e.state;
+        const value = e.score !== undefined ? e.score : e.changes !== undefined ? e.changes : e.count;
+        const next = e.type === "review" ? "Score anpassen" : e.type === "update" ? "Daten ändern" : "Struktur erweitern";
+
+        tr.innerHTML = `
+            <td>${e.name}</td>
+            <td class="status-${e.type}">${status}</td>
+            <td>${value}</td>
+            <td>${next}</td>
+        `;
+        body.appendChild(tr);
+    });
+}
+
+// 4. Log
+function log(msg) {
+    const el = document.getElementById('log');
+    const e = document.createElement('div');
+    e.textContent = msg;
+    el.appendChild(e);
+    el.scrollTop = el.scrollHeight;
+}
+
+// 5. Initialer Check
+renderTable();
+log('🌀 EVO-System bereit. REV / UPD / UPG getrennt organisiert.');
+log('🌀 Klicke auf die Buttons für separate Algorithmik.');
+</script>
+
+</body>
+</html>
