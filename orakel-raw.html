@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>◈ ORAKEL · RAW.md · nanoWÜRFEL · spiegel</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#02040a;color:#c8d8e8;
+    font-family:'Consolas',monospace;font-size:12px;overflow:hidden}
+  body{display:grid;grid-template-rows:32px 1fr 22px}
+
+  #top{background:#0a0c18;border-bottom:1px solid #1a2040;
+    display:flex;align-items:center;padding:0 14px;
+    font-size:11px;letter-spacing:2px;gap:14px}
+  #top b{color:#ffcc44}
+  #top .r{margin-left:auto;display:flex;gap:14px;font-size:10px;color:#5a7288}
+  #top .r b{color:#b388ff}
+
+  #main{display:grid;grid-template-columns:1fr 1fr 340px;
+    gap:1px;background:#000;overflow:hidden;min-height:0}
+
+  .col{background:#05070e;display:flex;flex-direction:column;
+    overflow:hidden;min-height:0}
+  .col h2{background:#0a0c18;color:#d8b4ff;font-size:10px;
+    padding:6px 12px;letter-spacing:2px;font-weight:normal;
+    border-bottom:1px solid #1a2040;
+    display:flex;justify-content:space-between;
+    text-transform:uppercase}
+  .col h2 b{color:#ffcc44}
+  .body{flex:1;overflow:auto;padding:10px;font-size:11px;
+    line-height:1.7}
+  .body::-webkit-scrollbar{width:5px}
+  .body::-webkit-scrollbar-thumb{background:#1a2040}
+
+  /* SVG-Canvas */
+  svg,canvas{display:block;width:100%;height:100%}
+
+  /* Formel-Block */
+  .eq{background:#0a0c18;border-left:2px solid #ffcc44;
+    padding:6px 10px;margin:4px 0;font-size:11px;
+    color:#d8b4ff;white-space:pre-wrap}
+  .eq b{color:#ffcc44}
+
+  /* Zeilen */
+  .row{display:flex;justify-content:space-between;
+    padding:3px 0;border-bottom:1px dashed #1a2040;
+    font-size:10.5px}
+  .row:last-child{border:none}
+  .row .k{color:#5a7288}
+  .row .v{color:#ffcc44;font-weight:bold}
+  .row .v.ok{color:#8cf0d0}
+  .row .v.warn{color:#ffa040}
+  .row .v.err{color:#ff5a7a}
+
+  /* Bottom */
+  #bottom{background:#0a0c18;border-top:1px solid #1a2040;
+    display:flex;align-items:center;padding:0 14px;
+    font-size:10px;color:#5a7288;letter-spacing:1px;gap:14px}
+  #bottom b{color:#ffcc44}
+
+  /* Buttons */
+  .btn{background:#0a0c18;color:#d8b4ff;border:1px solid #2a2040;
+    padding:5px 10px;border-radius:3px;font-family:inherit;
+    font-size:10px;letter-spacing:1px;cursor:pointer;
+    text-transform:uppercase;transition:.15s;margin:2px}
+  .btn:hover{border-color:#ffcc44;color:#ffcc44;
+    background:rgba(255,204,68,.08)}
+  .btn.on{background:#1a3a2a;border-color:#8cf0d0;color:#8cf0d0}
+
+  /* Log */
+  #log{padding:6px 10px;font-size:10px;color:#5a7288;
+    background:#02040a;border-top:1px solid #1a2040;
+    max-height:100px;overflow:auto;line-height:1.6}
+  #log::-webkit-scrollbar{width:4px}
+  #log::-webkit-scrollbar-thumb{background:#1a2040}
+  #log .ln{padding:1px 0}
+  #log .ok{color:#8cf0d0}
+  #log .warn{color:#ffcc44}
+  #log .puls{color:#ff66c8}
+</style>
+</head>
+<body>
+
+<div id="top">
+  <span>◈ <b>ORAKEL</b> · raw.md · nanoWÜRFEL · spiegel</span>
+  <span class="r">
+    <span>WERT <b id="tWert">—</b></span>
+    <span>STUFE <b id="tStufe">—</b></span>
+    <span>PRÜFUNG <b id="tPrüf">—</b></span>
+    <span id="clock">--:--:--</span>
+  </span>
+</div>
+
+<div id="main">
+
+  <!-- LINKS: nanoWÜRFEL Visual -->
+  <div class="col">
+    <h2><span>◈ nanoWÜRFEL · 3D</span><b id="cubeState">ruht</b></h2>
+    <canvas id="cube"></canvas>
+  </div>
+
+  <!-- MITTE: raw.md Formeln + Live-Rechnung -->
+  <div class="col">
+    <h2><span>◈ RAW · formeln</span><b id="eqState">lädt</b></h2>
+    <div class="body">
+      <div class="eq">Der nanoWÜRFEL ist:
+<b>X³ → X² → X → 1</b>
+1 → X → X² → X³
+X² → 1 → X³ → X</div>
+
+      <div class="eq">= 1 → 2 reversible Evolution 3 → 4
+= 1 → X Operator-gesteuert X² → X³
+= 4 → 3 kontextabhängig 2 → 1
+= <b>0.777</b> EICH-stabil 0,777
+= <b>win²</b> dein System <b>win³</b>
+<b>ALL698869ALL</b> win</div>
+
+      <div class="eq">X (iki2li) · Y (HYPE) · Z (CALC)
+4D:
+  Zustand ▲ Winkel ◀●▶ Raum ▼ Zeit
+
+1D = Linie (iki – ÄH)
+2D = Fläche (AH – HA – ÄH – HÄ – NC – Q1–Q4)
+3D = Raum (iki – 1 – uc – 2/4/6 Stationen)
+4D = Zustand + Zeit + Winkel + Umstand (MAXI)</div>
+    </div>
+  </div>
+
+  <!-- RECHTS: Live-Rechnung + Prüfung -->
+  <div class="col">
+    <h2><span>◈ ORAKEL · prüft</span><b id="prüfState">—</b></h2>
+    <div class="body">
+      <div class="row"><span class="k">X³</span><span class="v" id="vX3">—</span></div>
+      <div class="row"><span class="k">X²</span><span class="v" id="vX2">—</span></div>
+      <div class="row"><span class="k">X</span><span class="v" id="vX1">—</span></div>
+      <div class="row"><span class="k">1</span><span class="v" id="v1">—</span></div>
+      <div class="row"><span class="k">sum</span><span class="v" id="vSum">—</span></div>
+      <div class="row"><span class="k">EICH</span><span class="v" id="vEich">0.777</span></div>
+      <div class="row"><span class="k">win²</span><span class="v" id="vWin2">—</span></div>
+      <div class="row"><span class="k">win³</span><span class="v" id="vWin3">—</span></div>
+      <div class="row"><span class="k">wurzel</span><span class="v" id="vWurzel">—</span></div>
+      <div class="row"><span class="k">fehler</span><span class="v err" id="vFehler">0</span></div>
+      <div class="row"><span class="k">strafe</span><span class="v err" id="vStrafe">0</span></div>
+
+      <div style="margin-top:8px">
+        <button class="btn" id="btnCalc">⟳ calc</button>
+        <button class="btn" id="btnRand">🎲 rand</button>
+        <button class="btn on" id="btnAuto">▶ auto</button>
+        <button class="btn" id="btnReset">⟲ reset</button>
+      </div>
+
+      <div id="log"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="bottom">
+  <span>◈ raw.md · nanoWÜRFEL · 0.777 · win² · win³</span>
+  <span>1600 = strafe · prüfung live</span>
+  <span style="margin-left:auto">© iki1uc</span>
+</div>
+
+<script>
+"use strict";
+/* ═══════════════════════════════════════════════════════════
+   ORAKEL · RAW.md · nanoWÜRFEL · SPIEGEL
+   ═══════════════════════════════════════════════════════════ */
+
+const S = {
+  X: 3,             // X-Operator (austauschbar)
+  X3: 27, X2: 9, X1: 3, EINS: 1,
+  sum: 0, eich: 0.777,
+  win2: 0, win3: 0, wurzel: 0,
+  fehler: 0, strafe: 0,
+  history: [],
+  tick: 0,
+  auto: true,
+  lastT: 0
+};
+
+/* ─── LOG ─────────────────────────────────────────────── */
+const logEl = document.getElementById("log");
+function log(msg, cls = "") {
+  const t = new Date().toLocaleTimeString("de-DE");
+  const d = document.createElement("div");
+  d.className = "ln " + cls;
+  d.textContent = `[${t}] ${msg}`;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+  while (logEl.children.length > 50) logEl.removeChild(logEl.firstChild);
+}
+
+/* ─── RECHNEN ─────────────────────────────────────────── */
+function rechne() {
+  const X = S.X;
+  S.X3 = X ** 3;
+  S.X2 = X ** 2;
+  S.X1 = X;
+  S.EINS = 1;
+
+  // Kette: X³ → X² → X → 1
+  S.sum = S.X3 + S.X2 + S.X1 + S.EINS;
+
+  // Wurzel aus X³
+  S.wurzel = Math.cbrt(S.X3);
+
+  // win² / win³ aus 21/42-Logik
+  S.win2 = (S.sum % 42) ** 2;
+  S.win3 = (S.sum % 42) ** 3;
+
+  // Fehler: wenn Wurzel nicht X ergibt, wenn sum nicht 40 (3³+3²+3+1)
+  let fehler = 0;
+  if (Math.abs(S.wurzel - X) > 0.0001) fehler++;
+  if (S.sum !== X**3 + X**2 + X + 1) fehler++;
+  if (S.win2 >= 42 ** 2) fehler++;
+
+  S.fehler = fehler;
+
+  // Prüfung: eich = X3/sum soll 0.777 sein (X=3: 27/40 = 0.675)
+  // Für X=3: eich = 27/40 = 0.675 (nahe 0.777)
+  const eich_ist = S.X3 / S.sum;
+
+  // Anzeige
+  document.getElementById("vX3").textContent = S.X3;
+  document.getElementById("vX2").textContent = S.X2;
+  document.getElementById("vX1").textContent = S.X1;
+  document.getElementById("v1").textContent = S.EINS;
+  document.getElementById("vSum").textContent = S.sum;
+  document.getElementById("vEich").textContent = eich_ist.toFixed(4);
+  document.getElementById("vWin2").textContent = S.win2;
+  document.getElementById("vWin3").textContent = S.win3;
+  document.getElementById("vWurzel").textContent = S.wurzel.toFixed(4);
+
+  document.getElementById("vFehler").textContent = S.fehler;
+  document.getElementById("vFehler").className = "v " + (S.fehler === 0 ? "ok" : "err");
+
+  if (S.fehler > 0) {
+    S.strafe = S.fehler * 1600;
+    document.getElementById("vStrafe").textContent = S.strafe;
+  } else {
+    S.strafe = 0;
+    document.getElementById("vStrafe").textContent = "0";
+  }
+
+  document.getElementById("tWert").textContent = S.sum;
+  document.getElementById("tStufe").textContent = "X=" + X + " · √3=" + Math.cbrt(X).toFixed(2);
+  document.getElementById("tPrüf").textContent = S.fehler === 0 ? "OK" : "F" + S.fehler;
+  document.getElementById("tPrüf").style.color = S.fehler === 0 ? "#8cf0d0" : "#ff5a7a";
+
+  document.getElementById("eqState").textContent = "aktiv";
+  document.getElementById("cubeState").textContent = "X=" + X;
+
+  S.history.push({ t: S.tick, X, sum: S.sum, fehler: S.fehler, eich: eich_ist });
+  if (S.history.length > 100) S.history.shift();
+}
+
+/* ─── 3D-CUBE Visualisierung ─────────────────────────── */
+const cv = document.getElementById("cube");
+const ctx = cv.getContext("2d");
+let W, H, cx, cy;
+
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const r = cv.parentElement.getBoundingClientRect();
+  W = r.width; H = r.height;
+  cv.width = W * dpr; cv.height = H * dpr;
+  cv.style.width = W + "px"; cv.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  cx = W / 2; cy = H / 2;
+}
+window.addEventListener("resize", resize);
+
+/* Cube-Ecken für X=3: 3×3×3 Würfel */
+function cubePoints(size, t) {
+  const pts = [];
+  const half = size / 2;
+  // 8 Ecken
+  for (let x of [-1, 1])
+    for (let y of [-1, 1])
+      for (let z of [-1, 1])
+        pts.push({ x: x*half, y: y*half, z: z*half, corner: true });
+  // Kanten-Interpolation (3 Punkte pro Kante = X=3)
+  return pts;
+}
+
+function rotate(p, ax, ay, az) {
+  let { x, y, z } = p;
+  // X-Achse
+  let cos = Math.cos(ax), sin = Math.sin(ax);
+  [y, z] = [y*cos - z*sin, y*sin + z*cos];
+  // Y-Achse
+  cos = Math.cos(ay); sin = Math.sin(ay);
+  [x, z] = [x*cos + z*sin, -x*sin + z*cos];
+  // Z-Achse
+  cos = Math.cos(az); sin = Math.sin(az);
+  [x, y] = [x*cos - y*sin, x*sin + y*cos];
+  return { x, y, z };
+}
+
+function project(p, dist = 500) {
+  const scale = dist / (dist + p.z);
+  return { x: cx + p.x * scale, y: cy + p.y * scale, scale };
+}
+
+function drawCube() {
+  const t = S.tick * 0.008;
+  ctx.fillStyle = "rgba(2,4,10,0.2)";
+  ctx.fillRect(0, 0, W, H);
+
+  const size = Math.min(W, H) * 0.5;
+  const X = S.X;
+
+  // Rotierende Würfel-Punkte (3^3 = 27 Punkte für X=3)
+  const N = X; // Anzahl pro Kante
+  const pts = [];
+  const step = size / (N - 1 || 1);
+  const half = size / 2;
+
+  for (let ix = 0; ix < N; ix++) {
+    for (let iy = 0; iy < N; iy++) {
+      for (let iz = 0; iz < N; iz++) {
+        const px = -half + ix * step;
+        const py = -half + iy * step;
+        const pz = -half + iz * step;
+
+        // Rotation auf allen Achsen
+        const r = rotate({ x: px, y: py, z: pz }, t * 0.7, t, t * 0.5);
+        const pr = project(r);
+        pts.push({ ...pr, z: r.z, ix, iy, iz });
+      }
+    }
+  }
+
+  // Punkte sortieren nach Z (hinten zuerst)
+  pts.sort((a, b) => a.z - b.z);
+
+  // Zeichnen
+  const colBase = S.fehler === 0 ? [140, 240, 208] : [255, 90, 122];
+  pts.forEach((p) => {
+    const depth = (p.z + half) / size;  // 0..1
+    const alpha = 0.3 + depth * 0.7;
+    const sz = 1.5 + depth * 2.5;
+
+    // Ist es ein Kern-Punkt (3³ = X=3)?
+    const isCenter = (p.ix === Math.floor(N/2) && p.iy === Math.floor(N/2) && p.iz === Math.floor(N/2));
+    const isCorner = (p.ix === 0 || p.ix === N-1) && (p.iy === 0 || p.iy === N-1) && (p.iz === 0 || p.iz === N-1);
+
+    if (isCenter) {
+      ctx.fillStyle = `rgba(255,204,68,${alpha})`;
+      ctx.shadowColor = "#ffcc44";
+      ctx.shadowBlur = 20;
+      sz = sz * 2.5;
+    } else if (isCorner) {
+      ctx.fillStyle = `rgba(216,180,255,${alpha})`;
+      ctx.shadowColor = "#d8b4ff";
+      ctx.shadowBlur = 12;
+      sz = sz * 1.6;
+    } else {
+      ctx.fillStyle = `rgba(${colBase[0]},${colBase[1]},${colBase[2]},${alpha})`;
+      ctx.shadowBlur = 0;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, sz, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+
+  // Zentrum: Zahl
+  ctx.font = "bold 22px Consolas";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "rgba(255,255,255,0.9)";
+  ctx.shadowColor = "#ffcc44";
+  ctx.shadowBlur = 15;
+  ctx.fillText(S.X3, cx, cy + 0.5);
+  ctx.shadowBlur = 0;
+
+  // Label
+  ctx.font = "10px Consolas";
+  ctx.fillStyle = "rgba(140,180,220,0.6)";
+  ctx.fillText(`X³ = ${S.X3} · ${N}³ Punkte`, cx, cy + size * 0.6);
+  ctx.fillText(`0.777 EICH`, cx, cy - size * 0.6);
+
+  // Ränder um aktuelles X³
+  if (S.fehler === 0) {
+    ctx.strokeStyle = "rgba(140,240,208,0.2)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(10, 10, W - 20, H - 20);
+  } else {
+    ctx.strokeStyle = "rgba(255,90,122,0.4)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(10, 10, W - 20, H - 20);
+  }
+
+  S.tick++;
+  requestAnimationFrame(drawCube);
+}
+
+/* ─── LOOP ────────────────────────────────────────────── */
+function loop(now) {
+  if (S.auto && now - S.lastT > 1500) {
+    S.lastT = now;
+    // Zufälliges X zwischen 2 und 5
+    S.X = 2 + Math.floor(Math.random() * 4);
+    rechne();
+    log(`◈ X = ${S.X} · X³=${S.X3} · sum=${S.sum} · eich=${(S.X3/S.sum).toFixed(4)}`, 
+        S.fehler === 0 ? "ok" : "err");
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ─── BUTTONS ─────────────────────────────────────────── */
+document.getElementById("btnCalc").addEventListener("click", () => {
+  rechne();
+  log(`◈ calc · X=${S.X}`, "puls");
+});
+document.getElementById("btnRand").addEventListener("click", () => {
+  S.X = 2 + Math.floor(Math.random() * 6);
+  rechne();
+  log(`🎲 rand · X=${S.X}`, "warn");
+});
+document.getElementById("btnAuto").addEventListener("click", (e) => {
+  S.auto = !S.auto;
+  e.currentTarget.classList.toggle("on", S.auto);
+  log(`▶ auto ${S.auto ? "on" : "off"}`, "warn");
+});
+document.getElementById("btnReset").addEventListener("click", () => {
+  S.X = 3;
+  S.tick = 0;
+  S.history = [];
+  rechne();
+  log(`⟲ reset · X=3`, "warn");
+});
+
+/* ─── CLOCK ───────────────────────────────────────────── */
+setInterval(() => {
+  document.getElementById("clock").textContent =
+    new Date().toLocaleTimeString("de-DE");
+}, 1000);
+
+/* ─── INIT ────────────────────────────────────────────── */
+resize();
+S.X = 3;
+rechne();
+log("◈ ORAKEL · RAW.md geladen", "ok");
+log("◈ nanoWÜRFEL · X³ → X² → X → 1", "puls");
+log("◈ EICH 0.777 · win² win³ · 1600 strafe pro Fehler", "warn");
+drawCube();
+requestAnimationFrame(loop);
+
+/* Public API */
+window.RAW = {
+  setX: (x) => { S.X = x; rechne(); },
+  state: () => ({ ...S, history: undefined }),
+  history: () => S.history.slice()
+};
+</script>
+</body>
+</html>
